@@ -22,4 +22,5 @@ public interface DataTableInterface {
 	int getRowsPerPage();
 	int getNumberOfPages();
 	int getCurrentPage();
+	Object[][] getRowsToDisplay();
 }

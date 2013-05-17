@@ -15,10 +15,18 @@
 */
 package com.himanshu.poc.generictable;
 
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class BasicDataTable implements DataTableInterface {
 
 	String[] headerRows;
 	Object[][] dataArr;
+	int currentPage;
+	int numberOfPages;
+	int rowsPerPage;
+	int[] rowsPerPageOptions;
+	Object[][] rowsToDisplay;
 
 	@Override
 	public abstract String[] getHeaderRows();
@@ -34,4 +42,61 @@ public abstract class BasicDataTable implements DataTableInterface {
 		this.dataArr = dataArr;
 	}
 
+	@Override
+	public int getCurrentPage() {
+		return this.currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	@Override
+	public int getNumberOfPages() {
+		return this.numberOfPages;
+	}
+
+	public void setNumberOfPages(int numberOfPages) {
+		this.numberOfPages = numberOfPages;
+	}
+
+	@Override
+	public int getRowsPerPage() {
+		return this.rowsPerPage;
+	}
+
+	public void setRowsPerPage(int rowsPerPage) {
+		this.rowsPerPage = rowsPerPage;
+	}
+
+	@Override
+	public int[] getRowsPerPageOptions() {
+		return this.rowsPerPageOptions;
+	}
+
+	public void setRowsPerPageOptions(int[] rowsPerPageOptions) {
+		this.rowsPerPageOptions = rowsPerPageOptions;
+	}
+
+	public Object[][] getRowsToDisplay() {
+		return rowsToDisplay;
+	}
+
+	public void setRowsToDisplay(Object[][] rowsToDisplay) {
+		this.rowsToDisplay = rowsToDisplay;
+	}
+
+	public void displayData() {
+		List<Object[]> data = Arrays.asList(getDataArr());
+		List<Object[]> listToDisplay;
+
+		if ( (data.size() > ((rowsPerPage*currentPage)+1)) &&  (data.size() > (rowsPerPage*(currentPage+1))) ) {
+			listToDisplay = data.subList(rowsPerPage*currentPage, rowsPerPage*(currentPage+1) );
+		} else if ( (data.size() > ((rowsPerPage*currentPage)+1)) &&  (data.size() <= (rowsPerPage*(currentPage+1))) ) {
+			listToDisplay = data.subList(rowsPerPage*currentPage, data.size() );
+		} else {
+			listToDisplay = data;
+		}
+		listToDisplay.toArray(rowsToDisplay);
+	}
 }

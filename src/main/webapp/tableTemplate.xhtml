@@ -4,35 +4,47 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core">
 <h:body>
 
-	<table border="1">
-		<tr>
-			<ui:repeat var="headerRowVal" value="#{bean.headerRows}" varStatus="status">
-				<th>#{headerRowVal}</th>
-			</ui:repeat>
-		</tr>
-		<tbody>
-			<ui:repeat var="o" value="#{bean.dataArr}" varStatus="status">
-				<h:panelGroup rendered="#{status.even}">
-					<tr>
-						<ui:repeat var="oo" value="#{o}" varStatus="statusInd">
-							<td>#{o[statusInd.index]}</td>
-						</ui:repeat>
-					</tr>
-				</h:panelGroup>
-				<h:panelGroup rendered="#{status.odd}">
-					<tr>
-						<ui:repeat var="oo" value="#{o}" varStatus="statusInd">
-							<td>#{o[statusInd.index]}</td>
-						</ui:repeat>
-					</tr>
-				</h:panelGroup>
-			</ui:repeat>
-		</tbody>
+	<h:panelGroup id="listTable" layout="block">
+		<table id="controlsTable">
+			<tr>
+				<td>
+					<h:commandButton value="Reload Data" action="#{bean.displayData}">
+	                	<f:ajax render="listTable" onevent="click"></f:ajax>
+	            	</h:commandButton>
+            	</td>
+			</tr>
+		</table>
+		<table border="1">
+			<tr>
+				<ui:repeat var="headerRowVal" value="#{bean.headerRows}" varStatus="status">
+					<th>#{headerRowVal}</th>
+				</ui:repeat>
+			</tr>
+			<tbody>
+				<ui:repeat var="o" value="#{bean.dataArr}" varStatus="status">
+					<h:panelGroup rendered="#{status.even}">
+						<tr>
+							<ui:repeat var="oo" value="#{o}" varStatus="statusInd">
+								<td>#{o[statusInd.index]}</td>
+							</ui:repeat>
+						</tr>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{status.odd}">
+						<tr>
+							<ui:repeat var="oo" value="#{o}" varStatus="statusInd">
+								<td>#{o[statusInd.index]}</td>
+							</ui:repeat>
+						</tr>
+					</h:panelGroup>
+				</ui:repeat>
+			</tbody>
 
-	</table>
+		</table>
+	</h:panelGroup>
 
 </h:body>
 </html>

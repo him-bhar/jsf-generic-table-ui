@@ -17,11 +17,13 @@ package com.himanshu.poc.bean;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import com.himanshu.poc.generictable.BasicDataTable;
 
 
 @ManagedBean(name="playerProfileManager")
+@SessionScoped
 public class PlayersProfileManager extends BasicDataTable {
 
 	private String[] headerRows;
