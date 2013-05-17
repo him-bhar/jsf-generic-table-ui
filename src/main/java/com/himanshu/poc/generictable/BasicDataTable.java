@@ -15,6 +15,7 @@
 */
 package com.himanshu.poc.generictable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,10 +23,10 @@ public abstract class BasicDataTable implements DataTableInterface {
 
 	String[] headerRows;
 	Object[][] dataArr;
-	int currentPage;
+	int currentPage = 1;
 	int numberOfPages;
-	int rowsPerPage;
-	int[] rowsPerPageOptions;
+	int rowsPerPage = 10;
+	int[] rowsPerPageOptions = {10, 20, 30};
 	Object[][] rowsToDisplay;
 
 	@Override
@@ -90,13 +91,24 @@ public abstract class BasicDataTable implements DataTableInterface {
 		List<Object[]> data = Arrays.asList(getDataArr());
 		List<Object[]> listToDisplay;
 
-		if ( (data.size() > ((rowsPerPage*currentPage)+1)) &&  (data.size() > (rowsPerPage*(currentPage+1))) ) {
-			listToDisplay = data.subList(rowsPerPage*currentPage, rowsPerPage*(currentPage+1) );
-		} else if ( (data.size() > ((rowsPerPage*currentPage)+1)) &&  (data.size() <= (rowsPerPage*(currentPage+1))) ) {
-			listToDisplay = data.subList(rowsPerPage*currentPage, data.size() );
+		int currentPageActualVal = currentPage -1;
+
+		if ( (data.size() > ((rowsPerPage*currentPageActualVal)+1)) &&  (data.size() > (rowsPerPage*(currentPageActualVal+1))) ) {
+			listToDisplay = data.subList(rowsPerPage*currentPageActualVal, rowsPerPage*(currentPageActualVal+1) );
+		} else if ( (data.size() > ((rowsPerPage*currentPageActualVal)+1)) &&  (data.size() <= (rowsPerPage*(currentPageActualVal+1))) ) {
+			listToDisplay = data.subList(rowsPerPage*currentPageActualVal, data.size() );
+		} else if ( (data.size() < ((rowsPerPage*currentPageActualVal)+1)) &&  (data.size() > (rowsPerPage*(currentPageActualVal+1))) ) {
+			//NOT POSSIBLE
+			listToDisplay = new ArrayList<>();
+		} else if ( (data.size() < ((rowsPerPage*currentPageActualVal)+1)) &&  (data.size() < (rowsPerPage*(currentPageActualVal+1))) ) {
+			//NOT POSSIBLE
+			listToDisplay = new ArrayList<>();
 		} else {
 			listToDisplay = data;
 		}
-		listToDisplay.toArray(rowsToDisplay);
+
+		rowsToDisplay = new Object[][] {};
+		rowsToDisplay = listToDisplay.toArray(rowsToDisplay);
+		System.out.println("rowsToDisplay "+rowsToDisplay);
 	}
 }

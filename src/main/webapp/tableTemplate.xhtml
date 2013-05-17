@@ -25,7 +25,7 @@
 				</ui:repeat>
 			</tr>
 			<tbody>
-				<ui:repeat var="o" value="#{bean.dataArr}" varStatus="status">
+				<ui:repeat var="o" value="#{bean.rowsToDisplay}" varStatus="status">
 					<h:panelGroup rendered="#{status.even}">
 						<tr>
 							<ui:repeat var="oo" value="#{o}" varStatus="statusInd">
