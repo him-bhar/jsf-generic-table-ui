@@ -11,9 +11,32 @@
 	<h:panelGroup id="listTable" layout="block">
 		<table id="controlsTable">
 			<tr>
+				<td colspan="5" align="center">
+					<h:commandButton value="Reload Data" >
+	                	<f:ajax render="listTable" event="click" listener="#{bean.displayData}"></f:ajax>
+	            	</h:commandButton>
+            	</td>
+			</tr>
+			<tr>
 				<td>
-					<h:commandButton value="Reload Data" action="#{bean.displayData}">
-	                	<f:ajax render="listTable" onevent="click"></f:ajax>
+					<h:commandButton value="First" disabled="#{! bean.firstEnabled}">
+	                	<f:ajax render="listTable" listener="#{bean.gotoFirstPage}" event="click"></f:ajax>
+	            	</h:commandButton>
+            	</td>
+            	<td>
+					<h:commandButton value="Previous" disabled="#{! bean.previousEnabled}">
+	                	<f:ajax render="listTable" listener="#{bean.gotoPreviousPage}" event="click"></f:ajax>
+	            	</h:commandButton>
+            	</td>
+            	<td></td>
+            	<td>
+					<h:commandButton value="Next" disabled="#{! bean.nextEnabled}">
+	                	<f:ajax render="listTable" listener="#{bean.gotoNextPage}" event="click"></f:ajax>
+	            	</h:commandButton>
+            	</td>
+            	<td>
+					<h:commandButton value="Last" disabled="#{! bean.lastEnabled}">
+	                	<f:ajax render="listTable" listener="#{bean.gotoLastPage}" event="click"></f:ajax>
 	            	</h:commandButton>
             	</td>
 			</tr>

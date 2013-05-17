@@ -15,6 +15,8 @@
 */
 package com.himanshu.poc.bean;
 
+import java.util.UUID;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -33,10 +35,10 @@ public class PlayersProfileManager extends BasicDataTable {
 	@PostConstruct
 	public void init() {
 		headerRows = new String[] {"First Name", "Last Name", "E-mail"};
-		dataArr = new Object[3][];
-		dataArr[0] = new Object[] {"himanshu", "bhardwaj", "h.b@dk.com"};
-		dataArr[1] = new Object[] {"sorabh", "solanki", "ss@gg.com"};
-		dataArr[2] = new Object[] {"gaurav", "goel", "gg@dd.com"};
+		dataArr = new Object[21][];
+		for (int i=0;i<21;i++) {
+			dataArr[i] = new Object[] {"himanshu"+i, "bhardwaj"+i, UUID.randomUUID().toString()};
+		}
 	}
 
 

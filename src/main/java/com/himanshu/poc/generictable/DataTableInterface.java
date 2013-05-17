@@ -23,4 +23,12 @@ public interface DataTableInterface {
 	int getNumberOfPages();
 	int getCurrentPage();
 	Object[][] getRowsToDisplay();
+	boolean isFirstEnabled();
+	boolean isLastEnabled();
+	boolean isPreviousEnabled();
+	boolean isNextEnabled();
+	void gotoPreviousPage();
+	void gotoNextPage();
+	void gotoFirstPage();
+	void gotoLastPage();
 }
